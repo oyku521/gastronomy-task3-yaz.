@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akıllı Mutfak - Tarif Asistanı</title>
+    <style>
+        :root {
+            --primary-color: #2c5e3b;
+            --accent-color: #e76f51;
+            --bg-color: #f4f6f4;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f4a261;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: var(--primary-color);
+        }
+        .ingredients-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .ingredient-item {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            user-select: none;
+            transition: 0.2s;
+        }
+        .ingredient-item input {
+            margin-right: 8px;
+        }
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .results {
+            margin-top: 30px;
+        }
+        .recipe-card {
+            background: #fff8f6;
+            border-left: 5px solid var(--accent-color);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">🍳 Akıllı Mutfak Asistanı</div>
+        <p>Mutfağınızdakilerle neler yapabileceğinizi keşfedin!</p>
+    </header>
+
+    <div class="container">
+        <h2>Malzemelerinizi Seçin</h2>
+        <p>Elimde bulunan malzemeleri işaretleyin, size uygun tarifleri listeleyelim:</p>
+        
+        <div class="ingredients-box">
+            <label class="ingredient-item"><input type="checkbox" value="yumurta"> Yumurta</label>
+            <label class="ingredient-item"><input type="checkbox" value="domates"> Domates</label>
+            <label class="ingredient-item"><input type="checkbox" value="biber"> Biber</label>
+            <label class="ingredient-item"><input type="checkbox" value="peynir"> Peynir</label>
+            <label class="ingredient-item"><input type="checkbox" value="un"> Un</label>
+            <label class="ingredient-item"><input type="checkbox" value="süt"> Süt</label>
+            <label class="ingredient-item"><input type="checkbox" value="makarna"> Makarna</label>
+            <label class="ingredient-item"><input type="checkbox" value="tavuk"> Tavuk</label>
+        </div>
+
+        <button onclick="findRecipes()">Tarif Önerisi Al</button>
+
+        <div class="results" id="recipeResults"></div>
+    </div>
+
+    <script>
+        const database = [
+            { name: "Menemen", items: ["yumurta", "domates", "biber"] },
+            { name: "Sade Omlet", items: ["yumurta", "peynir"] },
+            { name: "Krema Soslu Makarna", items: ["makarna", "süt"] },
+            { name: "Tavuklu Sote", items: ["tavuk", "domates", "biber"] },
+            { name: "Peynirli Sandviç", items: ["peynir", "domates"] }
+        ];
+
+        function findRecipes() {
+            const checkboxes = document.querySelectorAll('.ingredients-box input:checked');
+            const userIngredients = Array.from(checkboxes).map(cb => cb.value);
+            const resultsDiv = document.getElementById('recipeResults');
+            
+            resultsDiv.innerHTML = "<h3>Uygun Tarifler:</h3>";
+
+            let matched = 0;
+            database.forEach(recipe => {
+                const isMatch = recipe.items.some(item => userIngredients.includes(item));
+                if (isMatch && userIngredients.length > 0) {
+                    matched++;
+                    resultsDiv.innerHTML += `
+                        <div class="recipe-card">
+                            <strong>${recipe.name}</strong><br>
+                            <small>Gerekli malzemeler: ${recipe.items.join(', ')}</small>
+                        </div>
+                    `;
+                }
+            });
+
+            if (matched === 0) {
+                resultsDiv.innerHTML += "<p>Seçtiğiniz malzemelerle eşleşen bir tarif bulunamadı. Lütfen daha fazla malzeme seçin.</p>";
+            }
+        }
+    </script>
+</body>
+</html>
