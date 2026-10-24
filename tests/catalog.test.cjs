@@ -5,8 +5,8 @@ const path = require('node:path');
 const context = vm.createContext({});
 vm.runInContext(fs.readFileSync(path.join(__dirname, '../data.js'), 'utf8')+'\nglobalThis.catalog=foodCatalog;globalThis.list=recipes;', context);
 const {catalog,list}=context;
-assert.equal(list.length,50);
-assert.equal(new Set(list.map(r=>r.id)).size,50);
+assert.equal(list.length,80);
+assert.equal(new Set(list.map(r=>r.id)).size,80);
 const animal = new Set(['egg','milk','yogurt','feta','chicken','beef','salmon','fish','tuna','butter','honey']);
 for (const r of list) {
  assert(r.name.en && r.name.tr && r.minutes>0 && r.servings===2);
@@ -19,4 +19,4 @@ for (const r of list) {
 assert(list.some(r=>r.vegan&&r.glutenFree));
 assert(list.some(r=>!r.glutenFree));
 assert(list.some(r=>!r.vegan));
-console.log(`PASS: 50 bilingual measured recipes, unique IDs, nutrition inputs, dietary claims and local illustrations.`);
+console.log(`PASS: 80 bilingual measured recipes, unique IDs, nutrition inputs, dietary claims and local illustrations.`);

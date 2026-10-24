@@ -4,9 +4,9 @@ A bilingual, responsive recipe website published with GitHub Pages. English is t
 
 ## Features
 
-- **50 measured recipes:** classic everyday meals alongside vegan and gluten-free ingredient options. All recipes appear initially; dietary filters are optional and combinable.
-- 29 vegan recipes and 47 recipes without listed gluten-containing ingredients.
-- Search names and ingredients, filter by category or pantry ingredients, sort by protein/calories/time, and save favorites locally.
+- **80 measured recipes:** classic everyday meals alongside vegan and gluten-free ingredient options. All recipes appear initially; dietary filters are optional and combinable.
+- 47 vegan recipes and 76 recipes without listed gluten-containing ingredients.
+- Search names and ingredients, filter by category or pantry ingredients, sort by protein/calories/time, and save favorites locally. Pantry selection shows recipes with at least one selected ingredient. Recommended sorting prioritizes ingredient coverage, then number matched; every missing ingredient is listed. Dietary filters remain strict and can be combined. Wheat ingredients are never silently replaced with gluten-free alternatives; a notice explains conflicting selections.
 - Recipe details with gram quantities, adjustable servings, cooking steps, ingredient allergen notes and celiac preparation guidance.
 - Estimated energy (kcal), protein, carbohydrates and fat **per serving**, plus each macro's share of estimated calories. Changing servings scales ingredient amounts, not nutrition per serving.
 - Original SVG leaf logo and culinary illustrations. These are decorative illustrations, not photographs of the prepared dishes.
@@ -45,7 +45,12 @@ node --check pwa.js
 node --check sw.js
 ```
 
-The catalog check runs in GitHub Actions before publication. Browser validation during development covered all 50 recipes, both languages and persistence, combined dietary filters, pantry matching, favorites, sorting, translated details, serving scaling, macro calculations, empty states, mobile layouts and offline use including images. Re-run browser validation after behavior changes.
+The catalog check runs in GitHub Actions before publication. The regression test `tests/pantry.browser.cjs` exercises single-ingredient gluten-free matching, ordering, strict dietary combinations, translated selections and offline operation. With Playwright and Chromium available, run it against the local server:
+
+```sh
+CHROMIUM_PATH=/usr/bin/chromium KITCHEN_TEST_URL=http://localhost:8000/ node tests/pantry.browser.cjs
+```
+ Browser validation during development covered all 80 recipes, both languages and persistence, combined dietary filters, pantry matching, favorites, sorting, translated details, serving scaling, macro calculations, empty states, mobile layouts and offline use including images. Re-run browser validation after behavior changes.
 
 ## Publish
 
@@ -57,4 +62,4 @@ For application changes, bump `CACHE` in `sw.js` and keep its precache list alig
 
 ## Türkçe özet
 
-İngilizce ve Türkçe seçenekli, 50 tarifli Akıllı Mutfak sitesi. İlk açılışta tüm tarifler gösterilir. Vegan ve glutensiz malzeme filtreleri birlikte kullanılabilir. Klasik tarifler de bulunur. Tarif ayrıntılarında gramaj, porsiyon ayarı, hazırlanış, alerjen notları ve porsiyon başına yaklaşık besin değerleri vardır. Besin verileri doğrulanmış kaynaklardan alınmış ölçümler değil, genel editoryal tahminlerdir. Glutensiz etiketi çölyak için güvenlik garantisi vermez; sertifikalı ürün, etiket kontrolü ve çapraz temas önlemleri gerekir.
+İngilizce ve Türkçe seçenekli, 80 tarifli Akıllı Mutfak sitesi. İlk açılışta tüm tarifler gösterilir. Vegan ve glutensiz malzeme filtreleri birlikte kullanılabilir. Klasik tarifler de bulunur. Tarif ayrıntılarında gramaj, porsiyon ayarı, hazırlanış, alerjen notları ve porsiyon başına yaklaşık besin değerleri vardır. Besin verileri doğrulanmış kaynaklardan alınmış ölçümler değil, genel editoryal tahminlerdir. Glutensiz etiketi çölyak için güvenlik garantisi vermez; sertifikalı ürün, etiket kontrolü ve çapraz temas önlemleri gerekir.

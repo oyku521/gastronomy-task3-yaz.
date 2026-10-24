@@ -1,6 +1,6 @@
 'use strict';
 // Bump this version whenever a cached application file changes.
-const CACHE = 'akilli-mutfak-v3-bilingual';
+const CACHE = 'akilli-mutfak-v4-pantry80';
 const ROOT = new URL('./', self.location.href);
 const FILES = ["./", "index.html", "style.css", "data.js", "app.js", "pwa.js", "manifest.webmanifest", "icon.svg", "icons/icon-192.png", "icons/icon-512.png", "images/breakfast.svg", "images/chia.svg", "images/dessert.svg", "images/fish.svg", "images/hero.svg", "images/main.svg", "images/pancakes.svg", "images/pasta.svg", "images/potato.svg", "images/salad.svg", "images/side.svg", "images/snack.svg", "images/soup.svg", "images/tofu.svg", "images/yogurt.svg"];
 self.addEventListener('install', event => {

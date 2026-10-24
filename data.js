@@ -1,3 +1,3107 @@
 'use strict';
-const foodCatalog = {"egg": {"en": "Egg", "tr": "Yumurta", "protein": 13.0, "carbs": 1.1, "fat": 10.0, "allergens": ["eggs"]}, "milk": {"en": "Milk", "tr": "Süt", "protein": 3.4, "carbs": 4.8, "fat": 3.6, "allergens": ["milk"]}, "yogurt": {"en": "Plain yogurt", "tr": "Sade yoğurt", "protein": 4.0, "carbs": 5.0, "fat": 3.0, "allergens": ["milk"]}, "feta": {"en": "Feta cheese", "tr": "Beyaz peynir", "protein": 14.0, "carbs": 4.0, "fat": 21.0, "allergens": ["milk"]}, "chicken": {"en": "Raw chicken breast", "tr": "Çiğ tavuk göğsü", "protein": 23.0, "carbs": 0.0, "fat": 2.5, "allergens": []}, "beef": {"en": "Raw lean ground beef", "tr": "Çiğ az yağlı kıyma", "protein": 21.0, "carbs": 0.0, "fat": 10.0, "allergens": []}, "salmon": {"en": "Raw salmon", "tr": "Çiğ somon", "protein": 20.0, "carbs": 0.0, "fat": 13.0, "allergens": ["fish"]}, "tuna": {"en": "Drained canned tuna", "tr": "Süzülmüş konserve ton balığı", "protein": 25.0, "carbs": 0.0, "fat": 1.0, "allergens": ["fish"]}, "chickpeas": {"en": "Cooked chickpeas", "tr": "Haşlanmış nohut", "protein": 8.9, "carbs": 27.4, "fat": 2.6, "allergens": []}, "lentils": {"en": "Cooked lentils", "tr": "Haşlanmış mercimek", "protein": 9.0, "carbs": 20.0, "fat": 0.4, "allergens": []}, "beans": {"en": "Cooked white beans", "tr": "Haşlanmış kuru fasulye", "protein": 8.0, "carbs": 25.0, "fat": 0.6, "allergens": []}, "quinoa": {"en": "Cooked quinoa", "tr": "Pişmiş kinoa", "protein": 4.4, "carbs": 21.3, "fat": 1.9, "allergens": []}, "rice": {"en": "Cooked white rice", "tr": "Pişmiş beyaz pirinç", "protein": 2.7, "carbs": 28.0, "fat": 0.3, "allergens": []}, "brownRice": {"en": "Cooked brown rice", "tr": "Pişmiş esmer pirinç", "protein": 2.6, "carbs": 23.0, "fat": 0.9, "allergens": []}, "buckwheat": {"en": "Cooked buckwheat", "tr": "Pişmiş karabuğday", "protein": 3.4, "carbs": 20.0, "fat": 0.6, "allergens": []}, "pasta": {"en": "Dry wheat pasta", "tr": "Kuru buğday makarnası", "protein": 13.0, "carbs": 72.0, "fat": 1.5, "allergens": ["gluten"]}, "bread": {"en": "Wheat bread", "tr": "Buğday ekmeği", "protein": 9.0, "carbs": 49.0, "fat": 3.2, "allergens": ["gluten"]}, "flour": {"en": "Wheat flour", "tr": "Buğday unu", "protein": 10.0, "carbs": 76.0, "fat": 1.0, "allergens": ["gluten"]}, "gfPasta": {"en": "Certified GF dry pasta", "tr": "Sertifikalı glutensiz kuru makarna", "protein": 7.0, "carbs": 78.0, "fat": 1.0, "allergens": []}, "riceFlour": {"en": "Certified GF rice flour", "tr": "Sertifikalı glutensiz pirinç unu", "protein": 6.0, "carbs": 80.0, "fat": 1.4, "allergens": []}, "cornFlour": {"en": "Certified GF corn flour", "tr": "Sertifikalı glutensiz mısır unu", "protein": 7.0, "carbs": 76.0, "fat": 3.9, "allergens": []}, "gfOats": {"en": "Certified GF rolled oats", "tr": "Sertifikalı glutensiz yulaf ezmesi", "protein": 13.0, "carbs": 68.0, "fat": 7.0, "allergens": []}, "potato": {"en": "Raw potato", "tr": "Çiğ patates", "protein": 2.0, "carbs": 17.0, "fat": 0.1, "allergens": []}, "sweetPotato": {"en": "Raw sweet potato", "tr": "Çiğ tatlı patates", "protein": 1.6, "carbs": 20.0, "fat": 0.1, "allergens": []}, "tomato": {"en": "Tomato", "tr": "Domates", "protein": 0.9, "carbs": 3.9, "fat": 0.2, "allergens": []}, "pepper": {"en": "Sweet pepper", "tr": "Tatlı biber", "protein": 1.0, "carbs": 6.0, "fat": 0.3, "allergens": []}, "onion": {"en": "Onion", "tr": "Soğan", "protein": 1.1, "carbs": 9.0, "fat": 0.1, "allergens": []}, "garlic": {"en": "Garlic", "tr": "Sarımsak", "protein": 6.0, "carbs": 33.0, "fat": 0.5, "allergens": []}, "carrot": {"en": "Carrot", "tr": "Havuç", "protein": 0.9, "carbs": 10.0, "fat": 0.2, "allergens": []}, "zucchini": {"en": "Zucchini", "tr": "Kabak", "protein": 1.2, "carbs": 3.1, "fat": 0.3, "allergens": []}, "eggplant": {"en": "Eggplant", "tr": "Patlıcan", "protein": 1.0, "carbs": 6.0, "fat": 0.2, "allergens": []}, "spinach": {"en": "Spinach", "tr": "Ispanak", "protein": 2.9, "carbs": 3.6, "fat": 0.4, "allergens": []}, "mushroom": {"en": "Mushroom", "tr": "Mantar", "protein": 3.1, "carbs": 3.3, "fat": 0.3, "allergens": []}, "broccoli": {"en": "Broccoli", "tr": "Brokoli", "protein": 2.8, "carbs": 7.0, "fat": 0.4, "allergens": []}, "cucumber": {"en": "Cucumber", "tr": "Salatalık", "protein": 0.7, "carbs": 3.6, "fat": 0.1, "allergens": []}, "lettuce": {"en": "Lettuce", "tr": "Marul", "protein": 1.4, "carbs": 2.9, "fat": 0.2, "allergens": []}, "avocado": {"en": "Avocado flesh", "tr": "Avokado içi", "protein": 2.0, "carbs": 8.5, "fat": 15.0, "allergens": []}, "lemon": {"en": "Lemon juice", "tr": "Limon suyu", "protein": 0.4, "carbs": 7.0, "fat": 0.2, "allergens": []}, "oliveOil": {"en": "Olive oil", "tr": "Zeytinyağı", "protein": 0.0, "carbs": 0.0, "fat": 100.0, "allergens": []}, "butter": {"en": "Butter", "tr": "Tereyağı", "protein": 0.9, "carbs": 0.1, "fat": 81.0, "allergens": ["milk"]}, "tahini": {"en": "Plain tahini", "tr": "Sade tahin", "protein": 17.0, "carbs": 21.0, "fat": 54.0, "allergens": ["sesame"]}, "walnut": {"en": "Walnut kernels", "tr": "Ceviz içi", "protein": 15.0, "carbs": 14.0, "fat": 65.0, "allergens": ["nuts"]}, "almond": {"en": "Almonds", "tr": "Badem", "protein": 21.0, "carbs": 22.0, "fat": 50.0, "allergens": ["nuts"]}, "banana": {"en": "Banana flesh", "tr": "Muz içi", "protein": 1.1, "carbs": 23.0, "fat": 0.3, "allergens": []}, "apple": {"en": "Apple", "tr": "Elma", "protein": 0.3, "carbs": 14.0, "fat": 0.2, "allergens": []}, "berries": {"en": "Mixed berries", "tr": "Orman meyveleri", "protein": 0.7, "carbs": 12.0, "fat": 0.3, "allergens": []}, "chia": {"en": "Chia seeds", "tr": "Chia tohumu", "protein": 17.0, "carbs": 42.0, "fat": 31.0, "allergens": []}, "coconutMilk": {"en": "Unsweetened coconut milk", "tr": "Şekersiz Hindistan cevizi sütü", "protein": 2.0, "carbs": 3.0, "fat": 20.0, "allergens": []}, "tofu": {"en": "Plain firm tofu", "tr": "Sade sert tofu", "protein": 12.0, "carbs": 2.0, "fat": 7.0, "allergens": ["soy"]}, "cocoa": {"en": "Unsweetened cocoa", "tr": "Şekersiz kakao", "protein": 20.0, "carbs": 58.0, "fat": 14.0, "allergens": []}, "honey": {"en": "Honey", "tr": "Bal", "protein": 0.3, "carbs": 82.0, "fat": 0.0, "allergens": []}, "sugar": {"en": "Sugar", "tr": "Şeker", "protein": 0.0, "carbs": 100.0, "fat": 0.0, "allergens": []}, "parsley": {"en": "Parsley", "tr": "Maydanoz", "protein": 3.0, "carbs": 6.0, "fat": 0.8, "allergens": []}, "pumpkin": {"en": "Pumpkin", "tr": "Bal kabağı", "protein": 1.0, "carbs": 7.0, "fat": 0.1, "allergens": []}, "peas": {"en": "Cooked peas", "tr": "Haşlanmış bezelye", "protein": 5.4, "carbs": 15.0, "fat": 0.4, "allergens": []}, "fish": {"en": "Raw white fish", "tr": "Çiğ beyaz etli balık", "protein": 20.0, "carbs": 0.0, "fat": 2.0, "allergens": ["fish"]}};
-const recipes = [{"id": "r001", "name": {"en": "Menemen", "tr": "Menemen"}, "category": "breakfast", "method": "skillet", "minutes": 20, "servings": 2, "ingredients": [{"id": "egg", "grams": 200}, {"id": "tomato", "grams": 300}, {"id": "pepper", "grams": 150}, {"id": "onion", "grams": 80}, {"id": "oliveOil", "grams": 10}], "vegan": false, "glutenFree": true}, {"id": "r026", "name": {"en": "Chicken sauté", "tr": "Tavuk sote"}, "category": "main", "method": "chickenSkillet", "minutes": 30, "servings": 2, "ingredients": [{"id": "chicken", "grams": 350}, {"id": "tomato", "grams": 250}, {"id": "pepper", "grams": 200}, {"id": "onion", "grams": 100}, {"id": "oliveOil", "grams": 15}], "vegan": false, "glutenFree": true}, {"id": "r039", "name": {"en": "Mediterranean quinoa bowl", "tr": "Akdeniz kinoa kasesi"}, "category": "salad", "method": "bowl", "minutes": 15, "servings": 2, "ingredients": [{"id": "quinoa", "grams": 350}, {"id": "cucumber", "grams": 150}, {"id": "tomato", "grams": 200}, {"id": "parsley", "grams": 30}, {"id": "lemon", "grams": 30}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": true}, {"id": "r014", "name": {"en": "Creamy tomato soup", "tr": "Sütlü domates çorbası"}, "category": "soup", "method": "soup", "minutes": 25, "servings": 2, "ingredients": [{"id": "tomato", "grams": 500}, {"id": "milk", "grams": 150}, {"id": "flour", "grams": 20}, {"id": "oliveOil", "grams": 10}, {"id": "onion", "grams": 70}], "vegan": false, "glutenFree": false}, {"id": "r049", "name": {"en": "Tomato garlic pasta", "tr": "Domatesli sarımsaklı makarna"}, "category": "pasta", "method": "pasta", "minutes": 25, "servings": 2, "ingredients": [{"id": "pasta", "grams": 160}, {"id": "tomato", "grams": 350}, {"id": "garlic", "grams": 10}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": false}, {"id": "r077", "name": {"en": "Traditional milk rice pudding", "tr": "Sütlaç"}, "category": "dessert", "method": "ricePudding", "minutes": 25, "servings": 2, "ingredients": [{"id": "rice", "grams": 250}, {"id": "milk", "grams": 400}, {"id": "sugar", "grams": 35}], "vegan": false, "glutenFree": true}, {"id": "r065", "name": {"en": "Classic hummus", "tr": "Klasik humus"}, "category": "snack", "method": "blend", "minutes": 15, "servings": 2, "ingredients": [{"id": "chickpeas", "grams": 350}, {"id": "tahini", "grams": 50}, {"id": "lemon", "grams": 40}, {"id": "garlic", "grams": 10}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": true}, {"id": "r030", "name": {"en": "Baked salmon & broccoli", "tr": "Fırında somon ve brokoli"}, "category": "main", "method": "fishBake", "minutes": 30, "servings": 2, "ingredients": [{"id": "salmon", "grams": 300}, {"id": "broccoli", "grams": 350}, {"id": "lemon", "grams": 40}, {"id": "oliveOil", "grams": 10}], "vegan": false, "glutenFree": true}, {"id": "r008", "name": {"en": "Banana oat pancakes", "tr": "Muzlu yulaf pankek"}, "category": "breakfast", "method": "pancake", "minutes": 20, "servings": 2, "ingredients": [{"id": "gfOats", "grams": 100}, {"id": "banana", "grams": 200}, {"id": "egg", "grams": 100}, {"id": "milk", "grams": 80}, {"id": "oliveOil", "grams": 5}], "vegan": false, "glutenFree": true}, {"id": "r002", "name": {"en": "Feta omelette", "tr": "Peynirli omlet"}, "category": "breakfast", "method": "omelette", "minutes": 15, "servings": 2, "ingredients": [{"id": "egg", "grams": 200}, {"id": "feta", "grams": 60}, {"id": "oliveOil", "grams": 5}], "vegan": false, "glutenFree": true}, {"id": "r004", "name": {"en": "Spinach eggs", "tr": "Ispanaklı yumurta"}, "category": "breakfast", "method": "skillet", "minutes": 20, "servings": 2, "ingredients": [{"id": "egg", "grams": 200}, {"id": "spinach", "grams": 250}, {"id": "onion", "grams": 60}, {"id": "oliveOil", "grams": 10}], "vegan": false, "glutenFree": true}, {"id": "r006", "name": {"en": "Yogurt breakfast bowl", "tr": "Yoğurtlu kahvaltı kasesi"}, "category": "breakfast", "method": "bowl", "minutes": 10, "servings": 2, "ingredients": [{"id": "yogurt", "grams": 300}, {"id": "banana", "grams": 160}, {"id": "walnut", "grams": 25}, {"id": "chia", "grams": 15}], "vegan": false, "glutenFree": true}, {"id": "r007", "name": {"en": "Berry chia pudding", "tr": "Meyveli chia pudingi"}, "category": "breakfast", "method": "chill", "minutes": 190, "servings": 2, "ingredients": [{"id": "chia", "grams": 50}, {"id": "coconutMilk", "grams": 200}, {"id": "berries", "grams": 180}, {"id": "banana", "grams": 100}], "vegan": true, "glutenFree": true}, {"id": "r012", "name": {"en": "Tofu scramble", "tr": "Tofu karıştırması"}, "category": "breakfast", "method": "skillet", "minutes": 20, "servings": 2, "ingredients": [{"id": "tofu", "grams": 250}, {"id": "tomato", "grams": 150}, {"id": "pepper", "grams": 150}, {"id": "onion", "grams": 60}, {"id": "oliveOil", "grams": 10}], "vegan": true, "glutenFree": true}, {"id": "r060", "name": {"en": "Garlic roast potatoes", "tr": "Sarımsaklı fırın patates"}, "category": "side", "method": "roast", "minutes": 40, "servings": 2, "ingredients": [{"id": "potato", "grams": 500}, {"id": "garlic", "grams": 10}, {"id": "oliveOil", "grams": 20}], "vegan": true, "glutenFree": true}, {"id": "r013", "name": {"en": "Red lentil soup", "tr": "Mercimek çorbası"}, "category": "soup", "method": "soup", "minutes": 25, "servings": 2, "ingredients": [{"id": "lentils", "grams": 350}, {"id": "carrot", "grams": 150}, {"id": "onion", "grams": 100}, {"id": "potato", "grams": 100}, {"id": "oliveOil", "grams": 10}], "vegan": true, "glutenFree": true}, {"id": "r016", "name": {"en": "Pumpkin coconut soup", "tr": "Hindistan cevizli bal kabağı çorbası"}, "category": "soup", "method": "soup", "minutes": 35, "servings": 2, "ingredients": [{"id": "pumpkin", "grams": 450}, {"id": "coconutMilk", "grams": 150}, {"id": "onion", "grams": 100}, {"id": "oliveOil", "grams": 10}], "vegan": true, "glutenFree": true}, {"id": "r017", "name": {"en": "Chicken vegetable soup", "tr": "Tavuklu sebze çorbası"}, "category": "soup", "method": "chickenSoup", "minutes": 35, "servings": 2, "ingredients": [{"id": "chicken", "grams": 250}, {"id": "carrot", "grams": 150}, {"id": "potato", "grams": 200}, {"id": "onion", "grams": 100}, {"id": "oliveOil", "grams": 10}], "vegan": false, "glutenFree": true}, {"id": "r018", "name": {"en": "Broccoli soup", "tr": "Brokoli çorbası"}, "category": "soup", "method": "soup", "minutes": 25, "servings": 2, "ingredients": [{"id": "broccoli", "grams": 400}, {"id": "potato", "grams": 150}, {"id": "onion", "grams": 80}, {"id": "oliveOil", "grams": 10}], "vegan": true, "glutenFree": true}, {"id": "r019", "name": {"en": "White bean soup", "tr": "Kuru fasulye çorbası"}, "category": "soup", "method": "soup", "minutes": 25, "servings": 2, "ingredients": [{"id": "beans", "grams": 350}, {"id": "tomato", "grams": 250}, {"id": "carrot", "grams": 100}, {"id": "onion", "grams": 80}, {"id": "oliveOil", "grams": 10}], "vegan": true, "glutenFree": true}, {"id": "r020", "name": {"en": "Spinach lentil soup", "tr": "Ispanaklı mercimek çorbası"}, "category": "soup", "method": "soup", "minutes": 25, "servings": 2, "ingredients": [{"id": "lentils", "grams": 300}, {"id": "spinach", "grams": 200}, {"id": "carrot", "grams": 100}, {"id": "onion", "grams": 80}, {"id": "oliveOil", "grams": 10}], "vegan": true, "glutenFree": true}, {"id": "r061", "name": {"en": "Roasted vegetable tray", "tr": "Fırında karışık sebze"}, "category": "side", "method": "roast", "minutes": 35, "servings": 2, "ingredients": [{"id": "broccoli", "grams": 200}, {"id": "carrot", "grams": 200}, {"id": "zucchini", "grams": 200}, {"id": "pepper", "grams": 150}, {"id": "oliveOil", "grams": 20}], "vegan": true, "glutenFree": true}, {"id": "r023", "name": {"en": "Chickpea tomato stew", "tr": "Nohut yemeği"}, "category": "main", "method": "stew", "minutes": 30, "servings": 2, "ingredients": [{"id": "chickpeas", "grams": 400}, {"id": "tomato", "grams": 300}, {"id": "onion", "grams": 120}, {"id": "pepper", "grams": 100}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": true}, {"id": "r024", "name": {"en": "White bean stew", "tr": "Kuru fasulye yemeği"}, "category": "main", "method": "stew", "minutes": 30, "servings": 2, "ingredients": [{"id": "beans", "grams": 400}, {"id": "tomato", "grams": 300}, {"id": "onion", "grams": 120}, {"id": "carrot", "grams": 100}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": true}, {"id": "r025", "name": {"en": "Lentil vegetable stew", "tr": "Sebzeli mercimek yemeği"}, "category": "main", "method": "stew", "minutes": 30, "servings": 2, "ingredients": [{"id": "lentils", "grams": 400}, {"id": "carrot", "grams": 150}, {"id": "tomato", "grams": 250}, {"id": "onion", "grams": 100}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": true}, {"id": "r027", "name": {"en": "Lemon garlic chicken", "tr": "Limonlu sarımsaklı tavuk"}, "category": "main", "method": "chickenBake", "minutes": 40, "servings": 2, "ingredients": [{"id": "chicken", "grams": 350}, {"id": "potato", "grams": 300}, {"id": "lemon", "grams": 40}, {"id": "garlic", "grams": 10}, {"id": "oliveOil", "grams": 15}], "vegan": false, "glutenFree": true}, {"id": "r028", "name": {"en": "Mushroom chicken", "tr": "Mantarlı tavuk"}, "category": "main", "method": "chickenSkillet", "minutes": 30, "servings": 2, "ingredients": [{"id": "chicken", "grams": 350}, {"id": "mushroom", "grams": 250}, {"id": "milk", "grams": 100}, {"id": "onion", "grams": 80}, {"id": "oliveOil", "grams": 10}], "vegan": false, "glutenFree": true}, {"id": "r029", "name": {"en": "Tray-baked chicken & potatoes", "tr": "Fırında tavuk patates"}, "category": "main", "method": "chickenBake", "minutes": 45, "servings": 2, "ingredients": [{"id": "chicken", "grams": 400}, {"id": "potato", "grams": 400}, {"id": "onion", "grams": 100}, {"id": "carrot", "grams": 150}, {"id": "oliveOil", "grams": 15}], "vegan": false, "glutenFree": true}, {"id": "r031", "name": {"en": "Lemon baked white fish", "tr": "Limonlu fırın balık"}, "category": "main", "method": "fishBake", "minutes": 30, "servings": 2, "ingredients": [{"id": "fish", "grams": 350}, {"id": "potato", "grams": 300}, {"id": "tomato", "grams": 200}, {"id": "lemon", "grams": 40}, {"id": "oliveOil", "grams": 15}], "vegan": false, "glutenFree": true}, {"id": "r032", "name": {"en": "Stuffed eggplant skillet", "tr": "Karnıyarık usulü patlıcan"}, "category": "main", "method": "beefSkillet", "minutes": 40, "servings": 2, "ingredients": [{"id": "beef", "grams": 250}, {"id": "eggplant", "grams": 400}, {"id": "tomato", "grams": 250}, {"id": "onion", "grams": 100}, {"id": "oliveOil", "grams": 15}], "vegan": false, "glutenFree": true}, {"id": "r033", "name": {"en": "Beef & potato skillet", "tr": "Kıymalı patates"}, "category": "main", "method": "beefSkillet", "minutes": 35, "servings": 2, "ingredients": [{"id": "beef", "grams": 250}, {"id": "potato", "grams": 400}, {"id": "tomato", "grams": 200}, {"id": "onion", "grams": 100}, {"id": "oliveOil", "grams": 10}], "vegan": false, "glutenFree": true}, {"id": "r034", "name": {"en": "Eggplant tomato stew", "tr": "İmam bayıldı usulü patlıcan"}, "category": "main", "method": "stew", "minutes": 35, "servings": 2, "ingredients": [{"id": "eggplant", "grams": 450}, {"id": "tomato", "grams": 300}, {"id": "onion", "grams": 150}, {"id": "garlic", "grams": 10}, {"id": "oliveOil", "grams": 20}], "vegan": true, "glutenFree": true}, {"id": "r035", "name": {"en": "Zucchini tomato stew", "tr": "Kabak yemeği"}, "category": "main", "method": "stew", "minutes": 30, "servings": 2, "ingredients": [{"id": "zucchini", "grams": 500}, {"id": "tomato", "grams": 300}, {"id": "onion", "grams": 100}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": true}, {"id": "r036", "name": {"en": "Spinach chickpea skillet", "tr": "Nohutlu ıspanak"}, "category": "main", "method": "stew", "minutes": 25, "servings": 2, "ingredients": [{"id": "spinach", "grams": 400}, {"id": "chickpeas", "grams": 300}, {"id": "tomato", "grams": 200}, {"id": "onion", "grams": 100}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": true}, {"id": "r037", "name": {"en": "Tofu broccoli stir-fry", "tr": "Tofulu brokoli sote"}, "category": "main", "method": "skillet", "minutes": 25, "servings": 2, "ingredients": [{"id": "tofu", "grams": 300}, {"id": "broccoli", "grams": 300}, {"id": "carrot", "grams": 150}, {"id": "garlic", "grams": 10}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": true}, {"id": "r038", "name": {"en": "Chickpea pumpkin curry", "tr": "Nohutlu bal kabağı köri"}, "category": "main", "method": "stew", "minutes": 35, "servings": 2, "ingredients": [{"id": "chickpeas", "grams": 350}, {"id": "pumpkin", "grams": 350}, {"id": "coconutMilk", "grams": 150}, {"id": "onion", "grams": 100}, {"id": "oliveOil", "grams": 10}], "vegan": true, "glutenFree": true}, {"id": "r040", "name": {"en": "Chickpea garden salad", "tr": "Nohut salatası"}, "category": "salad", "method": "bowl", "minutes": 15, "servings": 2, "ingredients": [{"id": "chickpeas", "grams": 350}, {"id": "tomato", "grams": 200}, {"id": "cucumber", "grams": 200}, {"id": "onion", "grams": 60}, {"id": "lemon", "grams": 30}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": true}, {"id": "r041", "name": {"en": "Lentil parsley salad", "tr": "Mercimek salatası"}, "category": "salad", "method": "bowl", "minutes": 15, "servings": 2, "ingredients": [{"id": "lentils", "grams": 350}, {"id": "tomato", "grams": 200}, {"id": "parsley", "grams": 50}, {"id": "onion", "grams": 60}, {"id": "lemon", "grams": 30}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": true}, {"id": "r042", "name": {"en": "Shepherd's salad", "tr": "Çoban salata"}, "category": "salad", "method": "bowl", "minutes": 15, "servings": 2, "ingredients": [{"id": "tomato", "grams": 300}, {"id": "cucumber", "grams": 250}, {"id": "pepper", "grams": 100}, {"id": "onion", "grams": 60}, {"id": "lemon", "grams": 30}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": true}, {"id": "r043", "name": {"en": "Avocado quinoa salad", "tr": "Avokadolu kinoa salatası"}, "category": "salad", "method": "bowl", "minutes": 15, "servings": 2, "ingredients": [{"id": "avocado", "grams": 200}, {"id": "quinoa", "grams": 300}, {"id": "tomato", "grams": 200}, {"id": "lettuce", "grams": 100}, {"id": "lemon", "grams": 30}], "vegan": true, "glutenFree": true}, {"id": "r044", "name": {"en": "Tuna white bean salad", "tr": "Ton balıklı fasulye salatası"}, "category": "salad", "method": "bowl", "minutes": 15, "servings": 2, "ingredients": [{"id": "tuna", "grams": 200}, {"id": "beans", "grams": 300}, {"id": "tomato", "grams": 200}, {"id": "onion", "grams": 60}, {"id": "lemon", "grams": 30}, {"id": "oliveOil", "grams": 10}], "vegan": false, "glutenFree": true}, {"id": "r050", "name": {"en": "Creamy mushroom pasta", "tr": "Sütlü mantarlı makarna"}, "category": "pasta", "method": "pasta", "minutes": 25, "servings": 2, "ingredients": [{"id": "pasta", "grams": 160}, {"id": "mushroom", "grams": 250}, {"id": "milk", "grams": 180}, {"id": "oliveOil", "grams": 10}], "vegan": false, "glutenFree": false}, {"id": "r053", "name": {"en": "GF spinach pasta", "tr": "Glutensiz ıspanaklı makarna"}, "category": "pasta", "method": "pasta", "minutes": 25, "servings": 2, "ingredients": [{"id": "gfPasta", "grams": 160}, {"id": "spinach", "grams": 250}, {"id": "garlic", "grams": 10}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": true}, {"id": "r054", "name": {"en": "GF chickpea pasta bowl", "tr": "Glutensiz nohutlu makarna"}, "category": "pasta", "method": "pasta", "minutes": 25, "servings": 2, "ingredients": [{"id": "gfPasta", "grams": 160}, {"id": "chickpeas", "grams": 200}, {"id": "tomato", "grams": 250}, {"id": "oliveOil", "grams": 15}], "vegan": true, "glutenFree": true}, {"id": "r066", "name": {"en": "Cacık yogurt dip", "tr": "Cacık"}, "category": "snack", "method": "bowl", "minutes": 10, "servings": 2, "ingredients": [{"id": "yogurt", "grams": 350}, {"id": "cucumber", "grams": 250}, {"id": "garlic", "grams": 8}, {"id": "oliveOil", "grams": 10}], "vegan": false, "glutenFree": true}, {"id": "r067", "name": {"en": "Carrot yogurt dip", "tr": "Havuç tarator"}, "category": "snack", "method": "dip", "minutes": 20, "servings": 2, "ingredients": [{"id": "carrot", "grams": 300}, {"id": "yogurt", "grams": 250}, {"id": "garlic", "grams": 8}, {"id": "oliveOil", "grams": 15}], "vegan": false, "glutenFree": true}, {"id": "r068", "name": {"en": "Avocado chickpea spread", "tr": "Avokadolu nohut ezmesi"}, "category": "snack", "method": "blend", "minutes": 15, "servings": 2, "ingredients": [{"id": "avocado", "grams": 180}, {"id": "chickpeas", "grams": 250}, {"id": "lemon", "grams": 30}, {"id": "oliveOil", "grams": 10}], "vegan": true, "glutenFree": true}, {"id": "r073", "name": {"en": "Banana cocoa pudding", "tr": "Muzlu kakaolu puding"}, "category": "dessert", "method": "blend", "minutes": 10, "servings": 2, "ingredients": [{"id": "banana", "grams": 250}, {"id": "avocado", "grams": 150}, {"id": "cocoa", "grams": 20}, {"id": "coconutMilk", "grams": 80}], "vegan": true, "glutenFree": true}, {"id": "r074", "name": {"en": "Berry yogurt cups", "tr": "Meyveli yoğurt kupları"}, "category": "dessert", "method": "bowl", "minutes": 10, "servings": 2, "ingredients": [{"id": "yogurt", "grams": 350}, {"id": "berries", "grams": 200}, {"id": "honey", "grams": 20}, {"id": "almond", "grams": 30}], "vegan": false, "glutenFree": true}, {"id": "r075", "name": {"en": "Apple oat crumble", "tr": "Elmalı yulaf kırıntısı"}, "category": "dessert", "method": "fruitBake", "minutes": 35, "servings": 2, "ingredients": [{"id": "apple", "grams": 400}, {"id": "gfOats", "grams": 100}, {"id": "walnut", "grams": 40}, {"id": "oliveOil", "grams": 15}, {"id": "sugar", "grams": 20}], "vegan": true, "glutenFree": true}];
+const foodCatalog = {
+  "egg": {
+    "en": "Egg",
+    "tr": "Yumurta",
+    "protein": 13.0,
+    "carbs": 1.1,
+    "fat": 10.0,
+    "allergens": [
+      "eggs"
+    ]
+  },
+  "milk": {
+    "en": "Milk",
+    "tr": "Süt",
+    "protein": 3.4,
+    "carbs": 4.8,
+    "fat": 3.6,
+    "allergens": [
+      "milk"
+    ]
+  },
+  "yogurt": {
+    "en": "Plain yogurt",
+    "tr": "Sade yoğurt",
+    "protein": 4.0,
+    "carbs": 5.0,
+    "fat": 3.0,
+    "allergens": [
+      "milk"
+    ]
+  },
+  "feta": {
+    "en": "Feta cheese",
+    "tr": "Beyaz peynir",
+    "protein": 14.0,
+    "carbs": 4.0,
+    "fat": 21.0,
+    "allergens": [
+      "milk"
+    ]
+  },
+  "chicken": {
+    "en": "Raw chicken breast",
+    "tr": "Çiğ tavuk göğsü",
+    "protein": 23.0,
+    "carbs": 0.0,
+    "fat": 2.5,
+    "allergens": []
+  },
+  "beef": {
+    "en": "Raw lean ground beef",
+    "tr": "Çiğ az yağlı kıyma",
+    "protein": 21.0,
+    "carbs": 0.0,
+    "fat": 10.0,
+    "allergens": []
+  },
+  "salmon": {
+    "en": "Raw salmon",
+    "tr": "Çiğ somon",
+    "protein": 20.0,
+    "carbs": 0.0,
+    "fat": 13.0,
+    "allergens": [
+      "fish"
+    ]
+  },
+  "tuna": {
+    "en": "Drained canned tuna",
+    "tr": "Süzülmüş konserve ton balığı",
+    "protein": 25.0,
+    "carbs": 0.0,
+    "fat": 1.0,
+    "allergens": [
+      "fish"
+    ]
+  },
+  "chickpeas": {
+    "en": "Cooked chickpeas",
+    "tr": "Haşlanmış nohut",
+    "protein": 8.9,
+    "carbs": 27.4,
+    "fat": 2.6,
+    "allergens": []
+  },
+  "lentils": {
+    "en": "Cooked lentils",
+    "tr": "Haşlanmış mercimek",
+    "protein": 9.0,
+    "carbs": 20.0,
+    "fat": 0.4,
+    "allergens": []
+  },
+  "beans": {
+    "en": "Cooked white beans",
+    "tr": "Haşlanmış kuru fasulye",
+    "protein": 8.0,
+    "carbs": 25.0,
+    "fat": 0.6,
+    "allergens": []
+  },
+  "quinoa": {
+    "en": "Cooked quinoa",
+    "tr": "Pişmiş kinoa",
+    "protein": 4.4,
+    "carbs": 21.3,
+    "fat": 1.9,
+    "allergens": []
+  },
+  "rice": {
+    "en": "Cooked white rice",
+    "tr": "Pişmiş beyaz pirinç",
+    "protein": 2.7,
+    "carbs": 28.0,
+    "fat": 0.3,
+    "allergens": []
+  },
+  "brownRice": {
+    "en": "Cooked brown rice",
+    "tr": "Pişmiş esmer pirinç",
+    "protein": 2.6,
+    "carbs": 23.0,
+    "fat": 0.9,
+    "allergens": []
+  },
+  "buckwheat": {
+    "en": "Cooked buckwheat",
+    "tr": "Pişmiş karabuğday",
+    "protein": 3.4,
+    "carbs": 20.0,
+    "fat": 0.6,
+    "allergens": []
+  },
+  "pasta": {
+    "en": "Dry wheat pasta",
+    "tr": "Kuru buğday makarnası",
+    "protein": 13.0,
+    "carbs": 72.0,
+    "fat": 1.5,
+    "allergens": [
+      "gluten"
+    ]
+  },
+  "bread": {
+    "en": "Wheat bread",
+    "tr": "Buğday ekmeği",
+    "protein": 9.0,
+    "carbs": 49.0,
+    "fat": 3.2,
+    "allergens": [
+      "gluten"
+    ]
+  },
+  "flour": {
+    "en": "Wheat flour",
+    "tr": "Buğday unu",
+    "protein": 10.0,
+    "carbs": 76.0,
+    "fat": 1.0,
+    "allergens": [
+      "gluten"
+    ]
+  },
+  "gfPasta": {
+    "en": "Certified GF dry pasta",
+    "tr": "Sertifikalı glutensiz kuru makarna",
+    "protein": 7.0,
+    "carbs": 78.0,
+    "fat": 1.0,
+    "allergens": []
+  },
+  "riceFlour": {
+    "en": "Certified GF rice flour",
+    "tr": "Sertifikalı glutensiz pirinç unu",
+    "protein": 6.0,
+    "carbs": 80.0,
+    "fat": 1.4,
+    "allergens": []
+  },
+  "cornFlour": {
+    "en": "Certified GF corn flour",
+    "tr": "Sertifikalı glutensiz mısır unu",
+    "protein": 7.0,
+    "carbs": 76.0,
+    "fat": 3.9,
+    "allergens": []
+  },
+  "gfOats": {
+    "en": "Certified GF rolled oats",
+    "tr": "Sertifikalı glutensiz yulaf ezmesi",
+    "protein": 13.0,
+    "carbs": 68.0,
+    "fat": 7.0,
+    "allergens": []
+  },
+  "potato": {
+    "en": "Raw potato",
+    "tr": "Çiğ patates",
+    "protein": 2.0,
+    "carbs": 17.0,
+    "fat": 0.1,
+    "allergens": []
+  },
+  "sweetPotato": {
+    "en": "Raw sweet potato",
+    "tr": "Çiğ tatlı patates",
+    "protein": 1.6,
+    "carbs": 20.0,
+    "fat": 0.1,
+    "allergens": []
+  },
+  "tomato": {
+    "en": "Tomato",
+    "tr": "Domates",
+    "protein": 0.9,
+    "carbs": 3.9,
+    "fat": 0.2,
+    "allergens": []
+  },
+  "pepper": {
+    "en": "Sweet pepper",
+    "tr": "Tatlı biber",
+    "protein": 1.0,
+    "carbs": 6.0,
+    "fat": 0.3,
+    "allergens": []
+  },
+  "onion": {
+    "en": "Onion",
+    "tr": "Soğan",
+    "protein": 1.1,
+    "carbs": 9.0,
+    "fat": 0.1,
+    "allergens": []
+  },
+  "garlic": {
+    "en": "Garlic",
+    "tr": "Sarımsak",
+    "protein": 6.0,
+    "carbs": 33.0,
+    "fat": 0.5,
+    "allergens": []
+  },
+  "carrot": {
+    "en": "Carrot",
+    "tr": "Havuç",
+    "protein": 0.9,
+    "carbs": 10.0,
+    "fat": 0.2,
+    "allergens": []
+  },
+  "zucchini": {
+    "en": "Zucchini",
+    "tr": "Kabak",
+    "protein": 1.2,
+    "carbs": 3.1,
+    "fat": 0.3,
+    "allergens": []
+  },
+  "eggplant": {
+    "en": "Eggplant",
+    "tr": "Patlıcan",
+    "protein": 1.0,
+    "carbs": 6.0,
+    "fat": 0.2,
+    "allergens": []
+  },
+  "spinach": {
+    "en": "Spinach",
+    "tr": "Ispanak",
+    "protein": 2.9,
+    "carbs": 3.6,
+    "fat": 0.4,
+    "allergens": []
+  },
+  "mushroom": {
+    "en": "Mushroom",
+    "tr": "Mantar",
+    "protein": 3.1,
+    "carbs": 3.3,
+    "fat": 0.3,
+    "allergens": []
+  },
+  "broccoli": {
+    "en": "Broccoli",
+    "tr": "Brokoli",
+    "protein": 2.8,
+    "carbs": 7.0,
+    "fat": 0.4,
+    "allergens": []
+  },
+  "cucumber": {
+    "en": "Cucumber",
+    "tr": "Salatalık",
+    "protein": 0.7,
+    "carbs": 3.6,
+    "fat": 0.1,
+    "allergens": []
+  },
+  "lettuce": {
+    "en": "Lettuce",
+    "tr": "Marul",
+    "protein": 1.4,
+    "carbs": 2.9,
+    "fat": 0.2,
+    "allergens": []
+  },
+  "avocado": {
+    "en": "Avocado flesh",
+    "tr": "Avokado içi",
+    "protein": 2.0,
+    "carbs": 8.5,
+    "fat": 15.0,
+    "allergens": []
+  },
+  "lemon": {
+    "en": "Lemon juice",
+    "tr": "Limon suyu",
+    "protein": 0.4,
+    "carbs": 7.0,
+    "fat": 0.2,
+    "allergens": []
+  },
+  "oliveOil": {
+    "en": "Olive oil",
+    "tr": "Zeytinyağı",
+    "protein": 0.0,
+    "carbs": 0.0,
+    "fat": 100.0,
+    "allergens": []
+  },
+  "butter": {
+    "en": "Butter",
+    "tr": "Tereyağı",
+    "protein": 0.9,
+    "carbs": 0.1,
+    "fat": 81.0,
+    "allergens": [
+      "milk"
+    ]
+  },
+  "tahini": {
+    "en": "Plain tahini",
+    "tr": "Sade tahin",
+    "protein": 17.0,
+    "carbs": 21.0,
+    "fat": 54.0,
+    "allergens": [
+      "sesame"
+    ]
+  },
+  "walnut": {
+    "en": "Walnut kernels",
+    "tr": "Ceviz içi",
+    "protein": 15.0,
+    "carbs": 14.0,
+    "fat": 65.0,
+    "allergens": [
+      "nuts"
+    ]
+  },
+  "almond": {
+    "en": "Almonds",
+    "tr": "Badem",
+    "protein": 21.0,
+    "carbs": 22.0,
+    "fat": 50.0,
+    "allergens": [
+      "nuts"
+    ]
+  },
+  "banana": {
+    "en": "Banana flesh",
+    "tr": "Muz içi",
+    "protein": 1.1,
+    "carbs": 23.0,
+    "fat": 0.3,
+    "allergens": []
+  },
+  "apple": {
+    "en": "Apple",
+    "tr": "Elma",
+    "protein": 0.3,
+    "carbs": 14.0,
+    "fat": 0.2,
+    "allergens": []
+  },
+  "berries": {
+    "en": "Mixed berries",
+    "tr": "Orman meyveleri",
+    "protein": 0.7,
+    "carbs": 12.0,
+    "fat": 0.3,
+    "allergens": []
+  },
+  "chia": {
+    "en": "Chia seeds",
+    "tr": "Chia tohumu",
+    "protein": 17.0,
+    "carbs": 42.0,
+    "fat": 31.0,
+    "allergens": []
+  },
+  "coconutMilk": {
+    "en": "Unsweetened coconut milk",
+    "tr": "Şekersiz Hindistan cevizi sütü",
+    "protein": 2.0,
+    "carbs": 3.0,
+    "fat": 20.0,
+    "allergens": []
+  },
+  "tofu": {
+    "en": "Plain firm tofu",
+    "tr": "Sade sert tofu",
+    "protein": 12.0,
+    "carbs": 2.0,
+    "fat": 7.0,
+    "allergens": [
+      "soy"
+    ]
+  },
+  "cocoa": {
+    "en": "Unsweetened cocoa",
+    "tr": "Şekersiz kakao",
+    "protein": 20.0,
+    "carbs": 58.0,
+    "fat": 14.0,
+    "allergens": []
+  },
+  "honey": {
+    "en": "Honey",
+    "tr": "Bal",
+    "protein": 0.3,
+    "carbs": 82.0,
+    "fat": 0.0,
+    "allergens": []
+  },
+  "sugar": {
+    "en": "Sugar",
+    "tr": "Şeker",
+    "protein": 0.0,
+    "carbs": 100.0,
+    "fat": 0.0,
+    "allergens": []
+  },
+  "parsley": {
+    "en": "Parsley",
+    "tr": "Maydanoz",
+    "protein": 3.0,
+    "carbs": 6.0,
+    "fat": 0.8,
+    "allergens": []
+  },
+  "pumpkin": {
+    "en": "Pumpkin",
+    "tr": "Bal kabağı",
+    "protein": 1.0,
+    "carbs": 7.0,
+    "fat": 0.1,
+    "allergens": []
+  },
+  "peas": {
+    "en": "Cooked peas",
+    "tr": "Haşlanmış bezelye",
+    "protein": 5.4,
+    "carbs": 15.0,
+    "fat": 0.4,
+    "allergens": []
+  },
+  "fish": {
+    "en": "Raw white fish",
+    "tr": "Çiğ beyaz etli balık",
+    "protein": 20.0,
+    "carbs": 0.0,
+    "fat": 2.0,
+    "allergens": [
+      "fish"
+    ]
+  }
+};
+const recipes = [
+  {
+    "id": "r001",
+    "name": {
+      "en": "Menemen",
+      "tr": "Menemen"
+    },
+    "category": "breakfast",
+    "method": "skillet",
+    "minutes": 20,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "egg",
+        "grams": 200
+      },
+      {
+        "id": "tomato",
+        "grams": 300
+      },
+      {
+        "id": "pepper",
+        "grams": 150
+      },
+      {
+        "id": "onion",
+        "grams": 80
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r026",
+    "name": {
+      "en": "Chicken sauté",
+      "tr": "Tavuk sote"
+    },
+    "category": "main",
+    "method": "chickenSkillet",
+    "minutes": 30,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "chicken",
+        "grams": 350
+      },
+      {
+        "id": "tomato",
+        "grams": 250
+      },
+      {
+        "id": "pepper",
+        "grams": 200
+      },
+      {
+        "id": "onion",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r039",
+    "name": {
+      "en": "Mediterranean quinoa bowl",
+      "tr": "Akdeniz kinoa kasesi"
+    },
+    "category": "salad",
+    "method": "bowl",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "quinoa",
+        "grams": 350
+      },
+      {
+        "id": "cucumber",
+        "grams": 150
+      },
+      {
+        "id": "tomato",
+        "grams": 200
+      },
+      {
+        "id": "parsley",
+        "grams": 30
+      },
+      {
+        "id": "lemon",
+        "grams": 30
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r014",
+    "name": {
+      "en": "Creamy tomato soup",
+      "tr": "Sütlü domates çorbası"
+    },
+    "category": "soup",
+    "method": "soup",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "tomato",
+        "grams": 500
+      },
+      {
+        "id": "milk",
+        "grams": 150
+      },
+      {
+        "id": "flour",
+        "grams": 20
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      },
+      {
+        "id": "onion",
+        "grams": 70
+      }
+    ],
+    "vegan": false,
+    "glutenFree": false
+  },
+  {
+    "id": "r049",
+    "name": {
+      "en": "Tomato garlic pasta",
+      "tr": "Domatesli sarımsaklı makarna"
+    },
+    "category": "pasta",
+    "method": "pasta",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "pasta",
+        "grams": 160
+      },
+      {
+        "id": "tomato",
+        "grams": 350
+      },
+      {
+        "id": "garlic",
+        "grams": 10
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": false
+  },
+  {
+    "id": "r077",
+    "name": {
+      "en": "Traditional milk rice pudding",
+      "tr": "Sütlaç"
+    },
+    "category": "dessert",
+    "method": "ricePudding",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "rice",
+        "grams": 250
+      },
+      {
+        "id": "milk",
+        "grams": 400
+      },
+      {
+        "id": "sugar",
+        "grams": 35
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r065",
+    "name": {
+      "en": "Classic hummus",
+      "tr": "Klasik humus"
+    },
+    "category": "snack",
+    "method": "blend",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "chickpeas",
+        "grams": 350
+      },
+      {
+        "id": "tahini",
+        "grams": 50
+      },
+      {
+        "id": "lemon",
+        "grams": 40
+      },
+      {
+        "id": "garlic",
+        "grams": 10
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r030",
+    "name": {
+      "en": "Baked salmon & broccoli",
+      "tr": "Fırında somon ve brokoli"
+    },
+    "category": "main",
+    "method": "fishBake",
+    "minutes": 30,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "salmon",
+        "grams": 300
+      },
+      {
+        "id": "broccoli",
+        "grams": 350
+      },
+      {
+        "id": "lemon",
+        "grams": 40
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r008",
+    "name": {
+      "en": "Banana oat pancakes",
+      "tr": "Muzlu yulaf pankek"
+    },
+    "category": "breakfast",
+    "method": "pancake",
+    "minutes": 20,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "gfOats",
+        "grams": 100
+      },
+      {
+        "id": "banana",
+        "grams": 200
+      },
+      {
+        "id": "egg",
+        "grams": 100
+      },
+      {
+        "id": "milk",
+        "grams": 80
+      },
+      {
+        "id": "oliveOil",
+        "grams": 5
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r002",
+    "name": {
+      "en": "Feta omelette",
+      "tr": "Peynirli omlet"
+    },
+    "category": "breakfast",
+    "method": "omelette",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "egg",
+        "grams": 200
+      },
+      {
+        "id": "feta",
+        "grams": 60
+      },
+      {
+        "id": "oliveOil",
+        "grams": 5
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r004",
+    "name": {
+      "en": "Spinach eggs",
+      "tr": "Ispanaklı yumurta"
+    },
+    "category": "breakfast",
+    "method": "skillet",
+    "minutes": 20,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "egg",
+        "grams": 200
+      },
+      {
+        "id": "spinach",
+        "grams": 250
+      },
+      {
+        "id": "onion",
+        "grams": 60
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r006",
+    "name": {
+      "en": "Yogurt breakfast bowl",
+      "tr": "Yoğurtlu kahvaltı kasesi"
+    },
+    "category": "breakfast",
+    "method": "bowl",
+    "minutes": 10,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "yogurt",
+        "grams": 300
+      },
+      {
+        "id": "banana",
+        "grams": 160
+      },
+      {
+        "id": "walnut",
+        "grams": 25
+      },
+      {
+        "id": "chia",
+        "grams": 15
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r007",
+    "name": {
+      "en": "Berry chia pudding",
+      "tr": "Meyveli chia pudingi"
+    },
+    "category": "breakfast",
+    "method": "chill",
+    "minutes": 190,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "chia",
+        "grams": 50
+      },
+      {
+        "id": "coconutMilk",
+        "grams": 200
+      },
+      {
+        "id": "berries",
+        "grams": 180
+      },
+      {
+        "id": "banana",
+        "grams": 100
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r012",
+    "name": {
+      "en": "Tofu scramble",
+      "tr": "Tofu karıştırması"
+    },
+    "category": "breakfast",
+    "method": "skillet",
+    "minutes": 20,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "tofu",
+        "grams": 250
+      },
+      {
+        "id": "tomato",
+        "grams": 150
+      },
+      {
+        "id": "pepper",
+        "grams": 150
+      },
+      {
+        "id": "onion",
+        "grams": 60
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r060",
+    "name": {
+      "en": "Garlic roast potatoes",
+      "tr": "Sarımsaklı fırın patates"
+    },
+    "category": "side",
+    "method": "roast",
+    "minutes": 40,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "potato",
+        "grams": 500
+      },
+      {
+        "id": "garlic",
+        "grams": 10
+      },
+      {
+        "id": "oliveOil",
+        "grams": 20
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r013",
+    "name": {
+      "en": "Red lentil soup",
+      "tr": "Mercimek çorbası"
+    },
+    "category": "soup",
+    "method": "soup",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "lentils",
+        "grams": 350
+      },
+      {
+        "id": "carrot",
+        "grams": 150
+      },
+      {
+        "id": "onion",
+        "grams": 100
+      },
+      {
+        "id": "potato",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r016",
+    "name": {
+      "en": "Pumpkin coconut soup",
+      "tr": "Hindistan cevizli bal kabağı çorbası"
+    },
+    "category": "soup",
+    "method": "soup",
+    "minutes": 35,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "pumpkin",
+        "grams": 450
+      },
+      {
+        "id": "coconutMilk",
+        "grams": 150
+      },
+      {
+        "id": "onion",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r017",
+    "name": {
+      "en": "Chicken vegetable soup",
+      "tr": "Tavuklu sebze çorbası"
+    },
+    "category": "soup",
+    "method": "chickenSoup",
+    "minutes": 35,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "chicken",
+        "grams": 250
+      },
+      {
+        "id": "carrot",
+        "grams": 150
+      },
+      {
+        "id": "potato",
+        "grams": 200
+      },
+      {
+        "id": "onion",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r018",
+    "name": {
+      "en": "Broccoli soup",
+      "tr": "Brokoli çorbası"
+    },
+    "category": "soup",
+    "method": "soup",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "broccoli",
+        "grams": 400
+      },
+      {
+        "id": "potato",
+        "grams": 150
+      },
+      {
+        "id": "onion",
+        "grams": 80
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r019",
+    "name": {
+      "en": "White bean soup",
+      "tr": "Kuru fasulye çorbası"
+    },
+    "category": "soup",
+    "method": "soup",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "beans",
+        "grams": 350
+      },
+      {
+        "id": "tomato",
+        "grams": 250
+      },
+      {
+        "id": "carrot",
+        "grams": 100
+      },
+      {
+        "id": "onion",
+        "grams": 80
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r020",
+    "name": {
+      "en": "Spinach lentil soup",
+      "tr": "Ispanaklı mercimek çorbası"
+    },
+    "category": "soup",
+    "method": "soup",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "lentils",
+        "grams": 300
+      },
+      {
+        "id": "spinach",
+        "grams": 200
+      },
+      {
+        "id": "carrot",
+        "grams": 100
+      },
+      {
+        "id": "onion",
+        "grams": 80
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r061",
+    "name": {
+      "en": "Roasted vegetable tray",
+      "tr": "Fırında karışık sebze"
+    },
+    "category": "side",
+    "method": "roast",
+    "minutes": 35,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "broccoli",
+        "grams": 200
+      },
+      {
+        "id": "carrot",
+        "grams": 200
+      },
+      {
+        "id": "zucchini",
+        "grams": 200
+      },
+      {
+        "id": "pepper",
+        "grams": 150
+      },
+      {
+        "id": "oliveOil",
+        "grams": 20
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r023",
+    "name": {
+      "en": "Chickpea tomato stew",
+      "tr": "Nohut yemeği"
+    },
+    "category": "main",
+    "method": "stew",
+    "minutes": 30,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "chickpeas",
+        "grams": 400
+      },
+      {
+        "id": "tomato",
+        "grams": 300
+      },
+      {
+        "id": "onion",
+        "grams": 120
+      },
+      {
+        "id": "pepper",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r024",
+    "name": {
+      "en": "White bean stew",
+      "tr": "Kuru fasulye yemeği"
+    },
+    "category": "main",
+    "method": "stew",
+    "minutes": 30,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "beans",
+        "grams": 400
+      },
+      {
+        "id": "tomato",
+        "grams": 300
+      },
+      {
+        "id": "onion",
+        "grams": 120
+      },
+      {
+        "id": "carrot",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r025",
+    "name": {
+      "en": "Lentil vegetable stew",
+      "tr": "Sebzeli mercimek yemeği"
+    },
+    "category": "main",
+    "method": "stew",
+    "minutes": 30,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "lentils",
+        "grams": 400
+      },
+      {
+        "id": "carrot",
+        "grams": 150
+      },
+      {
+        "id": "tomato",
+        "grams": 250
+      },
+      {
+        "id": "onion",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r027",
+    "name": {
+      "en": "Lemon garlic chicken",
+      "tr": "Limonlu sarımsaklı tavuk"
+    },
+    "category": "main",
+    "method": "chickenBake",
+    "minutes": 40,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "chicken",
+        "grams": 350
+      },
+      {
+        "id": "potato",
+        "grams": 300
+      },
+      {
+        "id": "lemon",
+        "grams": 40
+      },
+      {
+        "id": "garlic",
+        "grams": 10
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r028",
+    "name": {
+      "en": "Mushroom chicken",
+      "tr": "Mantarlı tavuk"
+    },
+    "category": "main",
+    "method": "chickenSkillet",
+    "minutes": 30,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "chicken",
+        "grams": 350
+      },
+      {
+        "id": "mushroom",
+        "grams": 250
+      },
+      {
+        "id": "milk",
+        "grams": 100
+      },
+      {
+        "id": "onion",
+        "grams": 80
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r029",
+    "name": {
+      "en": "Tray-baked chicken & potatoes",
+      "tr": "Fırında tavuk patates"
+    },
+    "category": "main",
+    "method": "chickenBake",
+    "minutes": 45,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "chicken",
+        "grams": 400
+      },
+      {
+        "id": "potato",
+        "grams": 400
+      },
+      {
+        "id": "onion",
+        "grams": 100
+      },
+      {
+        "id": "carrot",
+        "grams": 150
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r031",
+    "name": {
+      "en": "Lemon baked white fish",
+      "tr": "Limonlu fırın balık"
+    },
+    "category": "main",
+    "method": "fishBake",
+    "minutes": 30,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "fish",
+        "grams": 350
+      },
+      {
+        "id": "potato",
+        "grams": 300
+      },
+      {
+        "id": "tomato",
+        "grams": 200
+      },
+      {
+        "id": "lemon",
+        "grams": 40
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r032",
+    "name": {
+      "en": "Stuffed eggplant skillet",
+      "tr": "Karnıyarık usulü patlıcan"
+    },
+    "category": "main",
+    "method": "beefSkillet",
+    "minutes": 40,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "beef",
+        "grams": 250
+      },
+      {
+        "id": "eggplant",
+        "grams": 400
+      },
+      {
+        "id": "tomato",
+        "grams": 250
+      },
+      {
+        "id": "onion",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r033",
+    "name": {
+      "en": "Beef & potato skillet",
+      "tr": "Kıymalı patates"
+    },
+    "category": "main",
+    "method": "beefSkillet",
+    "minutes": 35,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "beef",
+        "grams": 250
+      },
+      {
+        "id": "potato",
+        "grams": 400
+      },
+      {
+        "id": "tomato",
+        "grams": 200
+      },
+      {
+        "id": "onion",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r034",
+    "name": {
+      "en": "Eggplant tomato stew",
+      "tr": "İmam bayıldı usulü patlıcan"
+    },
+    "category": "main",
+    "method": "stew",
+    "minutes": 35,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "eggplant",
+        "grams": 450
+      },
+      {
+        "id": "tomato",
+        "grams": 300
+      },
+      {
+        "id": "onion",
+        "grams": 150
+      },
+      {
+        "id": "garlic",
+        "grams": 10
+      },
+      {
+        "id": "oliveOil",
+        "grams": 20
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r035",
+    "name": {
+      "en": "Zucchini tomato stew",
+      "tr": "Kabak yemeği"
+    },
+    "category": "main",
+    "method": "stew",
+    "minutes": 30,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "zucchini",
+        "grams": 500
+      },
+      {
+        "id": "tomato",
+        "grams": 300
+      },
+      {
+        "id": "onion",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r036",
+    "name": {
+      "en": "Spinach chickpea skillet",
+      "tr": "Nohutlu ıspanak"
+    },
+    "category": "main",
+    "method": "stew",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "spinach",
+        "grams": 400
+      },
+      {
+        "id": "chickpeas",
+        "grams": 300
+      },
+      {
+        "id": "tomato",
+        "grams": 200
+      },
+      {
+        "id": "onion",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r037",
+    "name": {
+      "en": "Tofu broccoli stir-fry",
+      "tr": "Tofulu brokoli sote"
+    },
+    "category": "main",
+    "method": "skillet",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "tofu",
+        "grams": 300
+      },
+      {
+        "id": "broccoli",
+        "grams": 300
+      },
+      {
+        "id": "carrot",
+        "grams": 150
+      },
+      {
+        "id": "garlic",
+        "grams": 10
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r038",
+    "name": {
+      "en": "Chickpea pumpkin curry",
+      "tr": "Nohutlu bal kabağı köri"
+    },
+    "category": "main",
+    "method": "stew",
+    "minutes": 35,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "chickpeas",
+        "grams": 350
+      },
+      {
+        "id": "pumpkin",
+        "grams": 350
+      },
+      {
+        "id": "coconutMilk",
+        "grams": 150
+      },
+      {
+        "id": "onion",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r040",
+    "name": {
+      "en": "Chickpea garden salad",
+      "tr": "Nohut salatası"
+    },
+    "category": "salad",
+    "method": "bowl",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "chickpeas",
+        "grams": 350
+      },
+      {
+        "id": "tomato",
+        "grams": 200
+      },
+      {
+        "id": "cucumber",
+        "grams": 200
+      },
+      {
+        "id": "onion",
+        "grams": 60
+      },
+      {
+        "id": "lemon",
+        "grams": 30
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r041",
+    "name": {
+      "en": "Lentil parsley salad",
+      "tr": "Mercimek salatası"
+    },
+    "category": "salad",
+    "method": "bowl",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "lentils",
+        "grams": 350
+      },
+      {
+        "id": "tomato",
+        "grams": 200
+      },
+      {
+        "id": "parsley",
+        "grams": 50
+      },
+      {
+        "id": "onion",
+        "grams": 60
+      },
+      {
+        "id": "lemon",
+        "grams": 30
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r042",
+    "name": {
+      "en": "Shepherd's salad",
+      "tr": "Çoban salata"
+    },
+    "category": "salad",
+    "method": "bowl",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "tomato",
+        "grams": 300
+      },
+      {
+        "id": "cucumber",
+        "grams": 250
+      },
+      {
+        "id": "pepper",
+        "grams": 100
+      },
+      {
+        "id": "onion",
+        "grams": 60
+      },
+      {
+        "id": "lemon",
+        "grams": 30
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r043",
+    "name": {
+      "en": "Avocado quinoa salad",
+      "tr": "Avokadolu kinoa salatası"
+    },
+    "category": "salad",
+    "method": "bowl",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "avocado",
+        "grams": 200
+      },
+      {
+        "id": "quinoa",
+        "grams": 300
+      },
+      {
+        "id": "tomato",
+        "grams": 200
+      },
+      {
+        "id": "lettuce",
+        "grams": 100
+      },
+      {
+        "id": "lemon",
+        "grams": 30
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r044",
+    "name": {
+      "en": "Tuna white bean salad",
+      "tr": "Ton balıklı fasulye salatası"
+    },
+    "category": "salad",
+    "method": "bowl",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "tuna",
+        "grams": 200
+      },
+      {
+        "id": "beans",
+        "grams": 300
+      },
+      {
+        "id": "tomato",
+        "grams": 200
+      },
+      {
+        "id": "onion",
+        "grams": 60
+      },
+      {
+        "id": "lemon",
+        "grams": 30
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r050",
+    "name": {
+      "en": "Creamy mushroom pasta",
+      "tr": "Sütlü mantarlı makarna"
+    },
+    "category": "pasta",
+    "method": "pasta",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "pasta",
+        "grams": 160
+      },
+      {
+        "id": "mushroom",
+        "grams": 250
+      },
+      {
+        "id": "milk",
+        "grams": 180
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": false
+  },
+  {
+    "id": "r053",
+    "name": {
+      "en": "GF spinach pasta",
+      "tr": "Glutensiz ıspanaklı makarna"
+    },
+    "category": "pasta",
+    "method": "pasta",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "gfPasta",
+        "grams": 160
+      },
+      {
+        "id": "spinach",
+        "grams": 250
+      },
+      {
+        "id": "garlic",
+        "grams": 10
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r054",
+    "name": {
+      "en": "GF chickpea pasta bowl",
+      "tr": "Glutensiz nohutlu makarna"
+    },
+    "category": "pasta",
+    "method": "pasta",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "gfPasta",
+        "grams": 160
+      },
+      {
+        "id": "chickpeas",
+        "grams": 200
+      },
+      {
+        "id": "tomato",
+        "grams": 250
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r066",
+    "name": {
+      "en": "Cacık yogurt dip",
+      "tr": "Cacık"
+    },
+    "category": "snack",
+    "method": "bowl",
+    "minutes": 10,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "yogurt",
+        "grams": 350
+      },
+      {
+        "id": "cucumber",
+        "grams": 250
+      },
+      {
+        "id": "garlic",
+        "grams": 8
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r067",
+    "name": {
+      "en": "Carrot yogurt dip",
+      "tr": "Havuç tarator"
+    },
+    "category": "snack",
+    "method": "dip",
+    "minutes": 20,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "carrot",
+        "grams": 300
+      },
+      {
+        "id": "yogurt",
+        "grams": 250
+      },
+      {
+        "id": "garlic",
+        "grams": 8
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r068",
+    "name": {
+      "en": "Avocado chickpea spread",
+      "tr": "Avokadolu nohut ezmesi"
+    },
+    "category": "snack",
+    "method": "blend",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "avocado",
+        "grams": 180
+      },
+      {
+        "id": "chickpeas",
+        "grams": 250
+      },
+      {
+        "id": "lemon",
+        "grams": 30
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r073",
+    "name": {
+      "en": "Banana cocoa pudding",
+      "tr": "Muzlu kakaolu puding"
+    },
+    "category": "dessert",
+    "method": "blend",
+    "minutes": 10,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "banana",
+        "grams": 250
+      },
+      {
+        "id": "avocado",
+        "grams": 150
+      },
+      {
+        "id": "cocoa",
+        "grams": 20
+      },
+      {
+        "id": "coconutMilk",
+        "grams": 80
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r074",
+    "name": {
+      "en": "Berry yogurt cups",
+      "tr": "Meyveli yoğurt kupları"
+    },
+    "category": "dessert",
+    "method": "bowl",
+    "minutes": 10,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "yogurt",
+        "grams": 350
+      },
+      {
+        "id": "berries",
+        "grams": 200
+      },
+      {
+        "id": "honey",
+        "grams": 20
+      },
+      {
+        "id": "almond",
+        "grams": 30
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r075",
+    "name": {
+      "en": "Apple oat crumble",
+      "tr": "Elmalı yulaf kırıntısı"
+    },
+    "category": "dessert",
+    "method": "fruitBake",
+    "minutes": 35,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "apple",
+        "grams": 400
+      },
+      {
+        "id": "gfOats",
+        "grams": 100
+      },
+      {
+        "id": "walnut",
+        "grams": 40
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      },
+      {
+        "id": "sugar",
+        "grams": 20
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r003",
+    "name": {
+      "en": "Mushroom omelette",
+      "tr": "Mantarlı omlet"
+    },
+    "category": "breakfast",
+    "method": "omelette",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "egg",
+        "grams": 200
+      },
+      {
+        "id": "mushroom",
+        "grams": 180
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r005",
+    "name": {
+      "en": "Potato omelette",
+      "tr": "Patatesli omlet"
+    },
+    "category": "breakfast",
+    "method": "omelette",
+    "minutes": 30,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "egg",
+        "grams": 200
+      },
+      {
+        "id": "potato",
+        "grams": 250
+      },
+      {
+        "id": "onion",
+        "grams": 70
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r011",
+    "name": {
+      "en": "Savory buckwheat bowl",
+      "tr": "Tuzlu karabuğday kasesi"
+    },
+    "category": "breakfast",
+    "method": "warmBowl",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "buckwheat",
+        "grams": 300
+      },
+      {
+        "id": "mushroom",
+        "grams": 180
+      },
+      {
+        "id": "spinach",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r015",
+    "name": {
+      "en": "Carrot soup",
+      "tr": "Havuç çorbası"
+    },
+    "category": "soup",
+    "method": "soup",
+    "minutes": 30,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "carrot",
+        "grams": 400
+      },
+      {
+        "id": "potato",
+        "grams": 150
+      },
+      {
+        "id": "onion",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r021",
+    "name": {
+      "en": "Zucchini soup",
+      "tr": "Kabak çorbası"
+    },
+    "category": "soup",
+    "method": "soup",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "zucchini",
+        "grams": 450
+      },
+      {
+        "id": "potato",
+        "grams": 150
+      },
+      {
+        "id": "onion",
+        "grams": 80
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r045",
+    "name": {
+      "en": "Greek-style feta salad",
+      "tr": "Beyaz peynirli Akdeniz salatası"
+    },
+    "category": "salad",
+    "method": "bowl",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "feta",
+        "grams": 120
+      },
+      {
+        "id": "cucumber",
+        "grams": 250
+      },
+      {
+        "id": "tomato",
+        "grams": 250
+      },
+      {
+        "id": "pepper",
+        "grams": 100
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r046",
+    "name": {
+      "en": "Rainbow carrot & apple salad",
+      "tr": "Elmalı renkli havuç salatası"
+    },
+    "category": "salad",
+    "method": "bowl",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "carrot",
+        "grams": 300
+      },
+      {
+        "id": "apple",
+        "grams": 200
+      },
+      {
+        "id": "parsley",
+        "grams": 30
+      },
+      {
+        "id": "lemon",
+        "grams": 30
+      },
+      {
+        "id": "walnut",
+        "grams": 30
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r047",
+    "name": {
+      "en": "Spinach walnut salad",
+      "tr": "Cevizli ıspanak salatası"
+    },
+    "category": "salad",
+    "method": "bowl",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "spinach",
+        "grams": 200
+      },
+      {
+        "id": "apple",
+        "grams": 200
+      },
+      {
+        "id": "walnut",
+        "grams": 40
+      },
+      {
+        "id": "lemon",
+        "grams": 30
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r048",
+    "name": {
+      "en": "Warm buckwheat salad",
+      "tr": "Ilık karabuğday salatası"
+    },
+    "category": "salad",
+    "method": "warmBowl",
+    "minutes": 20,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "buckwheat",
+        "grams": 350
+      },
+      {
+        "id": "mushroom",
+        "grams": 200
+      },
+      {
+        "id": "spinach",
+        "grams": 150
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      },
+      {
+        "id": "lemon",
+        "grams": 20
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r055",
+    "name": {
+      "en": "Yogurt garlic pasta",
+      "tr": "Yoğurtlu sarımsaklı makarna"
+    },
+    "category": "pasta",
+    "method": "pasta",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "pasta",
+        "grams": 160
+      },
+      {
+        "id": "yogurt",
+        "grams": 250
+      },
+      {
+        "id": "garlic",
+        "grams": 10
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": false
+  },
+  {
+    "id": "r056",
+    "name": {
+      "en": "Vegetable rice pilaf",
+      "tr": "Sebzeli pirinç pilavı"
+    },
+    "category": "main",
+    "method": "warmBowl",
+    "minutes": 20,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "rice",
+        "grams": 400
+      },
+      {
+        "id": "carrot",
+        "grams": 150
+      },
+      {
+        "id": "peas",
+        "grams": 150
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r057",
+    "name": {
+      "en": "Chicken rice bowl",
+      "tr": "Tavuklu pilav kasesi"
+    },
+    "category": "main",
+    "method": "chickenSkillet",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "chicken",
+        "grams": 300
+      },
+      {
+        "id": "rice",
+        "grams": 350
+      },
+      {
+        "id": "pepper",
+        "grams": 150
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r058",
+    "name": {
+      "en": "Chickpea brown rice bowl",
+      "tr": "Nohutlu esmer pirinç kasesi"
+    },
+    "category": "main",
+    "method": "warmBowl",
+    "minutes": 20,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "brownRice",
+        "grams": 350
+      },
+      {
+        "id": "chickpeas",
+        "grams": 300
+      },
+      {
+        "id": "tomato",
+        "grams": 200
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r059",
+    "name": {
+      "en": "Lemon herb quinoa",
+      "tr": "Limonlu otlu kinoa"
+    },
+    "category": "side",
+    "method": "warmBowl",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "quinoa",
+        "grams": 350
+      },
+      {
+        "id": "parsley",
+        "grams": 40
+      },
+      {
+        "id": "lemon",
+        "grams": 40
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r063",
+    "name": {
+      "en": "Roasted sweet potato",
+      "tr": "Fırında tatlı patates"
+    },
+    "category": "side",
+    "method": "roast",
+    "minutes": 35,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "sweetPotato",
+        "grams": 500
+      },
+      {
+        "id": "oliveOil",
+        "grams": 20
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r064",
+    "name": {
+      "en": "Garlic mushrooms",
+      "tr": "Sarımsaklı mantar"
+    },
+    "category": "side",
+    "method": "skillet",
+    "minutes": 20,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "mushroom",
+        "grams": 450
+      },
+      {
+        "id": "garlic",
+        "grams": 15
+      },
+      {
+        "id": "parsley",
+        "grams": 30
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r069",
+    "name": {
+      "en": "Walnut lentil spread",
+      "tr": "Cevizli mercimek ezmesi"
+    },
+    "category": "snack",
+    "method": "blend",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "lentils",
+        "grams": 300
+      },
+      {
+        "id": "walnut",
+        "grams": 50
+      },
+      {
+        "id": "lemon",
+        "grams": 30
+      },
+      {
+        "id": "garlic",
+        "grams": 8
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r071",
+    "name": {
+      "en": "GF zucchini fritters",
+      "tr": "Glutensiz kabak mücver"
+    },
+    "category": "snack",
+    "method": "pancake",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "zucchini",
+        "grams": 350
+      },
+      {
+        "id": "egg",
+        "grams": 100
+      },
+      {
+        "id": "riceFlour",
+        "grams": 60
+      },
+      {
+        "id": "feta",
+        "grams": 60
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r072",
+    "name": {
+      "en": "Corn flour pancakes",
+      "tr": "Mısır unlu pankek"
+    },
+    "category": "breakfast",
+    "method": "pancake",
+    "minutes": 20,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "cornFlour",
+        "grams": 120
+      },
+      {
+        "id": "egg",
+        "grams": 100
+      },
+      {
+        "id": "milk",
+        "grams": 180
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r076",
+    "name": {
+      "en": "Coconut rice pudding",
+      "tr": "Hindistan cevizli sütlaç"
+    },
+    "category": "dessert",
+    "method": "ricePudding",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "rice",
+        "grams": 250
+      },
+      {
+        "id": "coconutMilk",
+        "grams": 200
+      },
+      {
+        "id": "sugar",
+        "grams": 30
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r078",
+    "name": {
+      "en": "Banana chia cups",
+      "tr": "Muzlu chia kupları"
+    },
+    "category": "dessert",
+    "method": "chill",
+    "minutes": 190,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "banana",
+        "grams": 250
+      },
+      {
+        "id": "chia",
+        "grams": 45
+      },
+      {
+        "id": "coconutMilk",
+        "grams": 200
+      },
+      {
+        "id": "cocoa",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r079",
+    "name": {
+      "en": "Baked honey apples",
+      "tr": "Fırında ballı elma"
+    },
+    "category": "dessert",
+    "method": "fruitBake",
+    "minutes": 30,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "apple",
+        "grams": 400
+      },
+      {
+        "id": "walnut",
+        "grams": 40
+      },
+      {
+        "id": "honey",
+        "grams": 25
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r080",
+    "name": {
+      "en": "Berry oat smoothie bowl",
+      "tr": "Meyveli yulaf smoothie kasesi"
+    },
+    "category": "breakfast",
+    "method": "blend",
+    "minutes": 10,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "berries",
+        "grams": 250
+      },
+      {
+        "id": "banana",
+        "grams": 180
+      },
+      {
+        "id": "gfOats",
+        "grams": 60
+      },
+      {
+        "id": "coconutMilk",
+        "grams": 120
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r081",
+    "name": {
+      "en": "GF tomato soup",
+      "tr": "Glutensiz domates çorbası"
+    },
+    "category": "soup",
+    "method": "soup",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "tomato",
+        "grams": 500
+      },
+      {
+        "id": "milk",
+        "grams": 150
+      },
+      {
+        "id": "riceFlour",
+        "grams": 20
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      },
+      {
+        "id": "onion",
+        "grams": 70
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r082",
+    "name": {
+      "en": "GF tomato garlic pasta",
+      "tr": "Glutensiz domatesli sarımsaklı makarna"
+    },
+    "category": "pasta",
+    "method": "pasta",
+    "minutes": 25,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "gfPasta",
+        "grams": 160
+      },
+      {
+        "id": "tomato",
+        "grams": 350
+      },
+      {
+        "id": "garlic",
+        "grams": 10
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r083",
+    "name": {
+      "en": "Tomato feta salad",
+      "tr": "Domatesli peynir salatası"
+    },
+    "category": "salad",
+    "method": "bowl",
+    "minutes": 10,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "tomato",
+        "grams": 350
+      },
+      {
+        "id": "feta",
+        "grams": 100
+      },
+      {
+        "id": "parsley",
+        "grams": 30
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r084",
+    "name": {
+      "en": "Egg tomato skillet",
+      "tr": "Domatesli yumurta"
+    },
+    "category": "breakfast",
+    "method": "skillet",
+    "minutes": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "egg",
+        "grams": 200
+      },
+      {
+        "id": "tomato",
+        "grams": 300
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  },
+  {
+    "id": "r085",
+    "name": {
+      "en": "Potato chickpea tray",
+      "tr": "Fırında nohutlu patates"
+    },
+    "category": "main",
+    "method": "roast",
+    "minutes": 40,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "potato",
+        "grams": 350
+      },
+      {
+        "id": "chickpeas",
+        "grams": 300
+      },
+      {
+        "id": "tomato",
+        "grams": 200
+      },
+      {
+        "id": "oliveOil",
+        "grams": 15
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r086",
+    "name": {
+      "en": "Lentil rice bowl",
+      "tr": "Mercimekli pirinç kasesi"
+    },
+    "category": "main",
+    "method": "warmBowl",
+    "minutes": 20,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "lentils",
+        "grams": 300
+      },
+      {
+        "id": "rice",
+        "grams": 300
+      },
+      {
+        "id": "carrot",
+        "grams": 150
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": true,
+    "glutenFree": true
+  },
+  {
+    "id": "r087",
+    "name": {
+      "en": "GF cocoa pancakes",
+      "tr": "Glutensiz kakaolu pankek"
+    },
+    "category": "breakfast",
+    "method": "pancake",
+    "minutes": 20,
+    "servings": 2,
+    "ingredients": [
+      {
+        "id": "riceFlour",
+        "grams": 100
+      },
+      {
+        "id": "egg",
+        "grams": 100
+      },
+      {
+        "id": "milk",
+        "grams": 180
+      },
+      {
+        "id": "cocoa",
+        "grams": 15
+      },
+      {
+        "id": "oliveOil",
+        "grams": 10
+      }
+    ],
+    "vegan": false,
+    "glutenFree": true
+  }
+];
