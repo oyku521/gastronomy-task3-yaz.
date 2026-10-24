@@ -1,14 +1,14 @@
 {
   "id": "./",
-  "name": "Akıllı Mutfak — Tarif Asistanı",
-  "short_name": "Akıllı Mutfak",
-  "description": "Elindeki malzemelerle 50 tarif keşfet. Favorilerini sakla, çevrimdışı kullan.",
-  "lang": "tr",
+  "name": "Smart Kitchen · Akıllı Mutfak",
+  "short_name": "Smart Kitchen",
+  "description": "50 recipes, vegan and gluten-free ingredient filters, estimated nutrition. English & Türkçe.",
+  "lang": "en",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#faf9f5",
-  "theme_color": "#254d3e",
+  "theme_color": "#284f43",
   "icons": [
     {
       "src": "icons/icon-192.png",

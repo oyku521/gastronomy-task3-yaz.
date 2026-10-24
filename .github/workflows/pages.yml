@@ -15,15 +15,17 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/configure-pages@v5
+      - name: Validate recipe catalog
+        run: node tests/catalog.test.cjs
       - name: Prepare public files
         run: |
           mkdir _site
           cp index.html style.css app.js data.js icon.svg manifest.webmanifest sw.js pwa.js _site/
-          cp -R icons _site/
+          cp -R icons images _site/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

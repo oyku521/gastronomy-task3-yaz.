@@ -1,32 +1,60 @@
-# Akıllı Mutfak
+# Smart Kitchen / Akıllı Mutfak
 
-50 tarif içeren, telefon ve bilgisayara uyumlu Türkçe tarif keşif sitesi.
+A bilingual, responsive recipe website published with GitHub Pages. English is the default; English/Türkçe is available throughout the interface, ingredient names, cooking steps and installation guidance.
 
-- Malzemelere göre tam eşleşen veya en fazla bir ana malzemesi eksik tarifler.
-- Tarif adı, kategori ve vegan filtreleri.
-- Tarayıcıda saklanan favoriler ve malzeme seçimleri.
-- Ek bağımlılık, sunucu hesabı veya API anahtarı gerektirmez.
+## Features
 
-## Yerelde çalıştırma
+- **50 measured recipes:** classic everyday meals alongside vegan and gluten-free ingredient options. All recipes appear initially; dietary filters are optional and combinable.
+- 29 vegan recipes and 47 recipes without listed gluten-containing ingredients.
+- Search names and ingredients, filter by category or pantry ingredients, sort by protein/calories/time, and save favorites locally.
+- Recipe details with gram quantities, adjustable servings, cooking steps, ingredient allergen notes and celiac preparation guidance.
+- Estimated energy (kcal), protein, carbohydrates and fat **per serving**, plus each macro's share of estimated calories. Changing servings scales ingredient amounts, not nutrition per serving.
+- Original SVG leaf logo and culinary illustrations. These are decorative illustrations, not photographs of the prepared dishes.
+- Installable PWA with all recipe data, both languages and artwork available offline after the readiness message. Language, favorites and ingredient selections are stored on the device.
 
-Depo klasöründe `python3 -m http.server 8000` komutunu çalıştırıp tarayıcıda `http://localhost:8000` adresini açın.
+## Nutrition methodology and limits
 
-## GitHub Pages
+`data.js` contains bilingual ingredients and recipes. Each ingredient has **generic editorial estimates** of protein, carbohydrate and fat per 100 g. These are not values fetched from a verified nutrient database, laboratory or branded-product label and must not be presented as such.
 
-Dosyaları GitHub deposunun `main` dalına gönderin. Depoda **Settings → Pages → Build and deployment → Source → GitHub Actions** seçin. `Publish website` iş akışı siteyi yayınlar; daha sonra main dalına yapılan gönderimler siteyi günceller. Canlı adres başarılı dağıtımın çıktısında görünür.
+For each recipe, macro grams are summed from `ingredient grams × macro per 100 g / 100`, then divided by the base number of servings. Calories use `4 × protein + 4 × carbohydrate + 9 × fat`. Macro percentages are calorie shares; rounding preserves a 100% total. These are not gram-weight percentages. Fiber-specific energy adjustments are not modeled.
 
-## Veriler
+All recipes currently have a base yield of 2 servings. Quantities are indicative, not a diet prescription. Water and optional seasonings are not included in the estimates. Ingredient names specify cooked legumes/grains versus raw meat/vegetables. Use cooked weights for cooked ingredients. Preparation losses, actual yield and different products change nutrition. Replace editorial estimates with validated ingredient-level data before using the site for clinical nutrition decisions.
 
-`data.js`, kullanıcının yüklediği HTML dosyasındaki 50 tarifi içerir. Kalori değerleri kaynak dosyadan alınan yaklaşık bilgilerdir; porsiyon ve ölçüler belirtilmediği için beslenme tavsiyesi sayılmaz. Tarif kartları malzemeleri gösterir; ayrıntılı pişirme yönergeleri içermez. Tuz, yağ ve diğer ek malzemeler ayrıca kontrol edilmelidir.
+## Dietary labels
 
-Görseller emoji tabanlı çizimlerdir. Çevrimdışı kullanım için sistem yazı tipleri kullanılır.
+Vegan flags exclude eggs, dairy, meat, fish and honey. Gluten-free ingredient flags exclude the catalog's wheat/gluten ingredients. Recipes with standard wheat pasta or wheat flour remain outside that filter.
 
-## Uygulama olarak yükleme (PWA)
+A gluten-free ingredient label is **not celiac safety certification**. Packaged foods (including oats, rice/corn flours, pasta, tofu and seasonings) need label checking and certified gluten-free sourcing where appropriate. Prevent cross-contact using clean, separate equipment, surfaces, strainers and cooking water; shared fryers can introduce gluten. Allergen lists are ingredient notes, not exhaustive allergen-free claims. Personal medical needs require a clinician or dietitian.
 
-GitHub Pages üzerinde HTTPS ile yayınlandığında site telefona veya bilgisayara kurulabilir. Android/Chrome ve bilgisayar/Edge için **Uygulamayı yükle** düğmesini veya tarayıcının yükleme menüsünü kullanın. iPhone/iPad üzerinde Safari → Paylaş → Ana Ekrana Ekle yolunu izleyin. Yükleme desteği tarayıcıya göre değişir. Bu bir PWA uygulamasıdır; APK veya App Store paketi değildir.
+## Run locally
 
-İlk çevrimiçi açılışta **Çevrimdışı kullanıma hazır** bildiriminin görünmesini bekleyin. Ardından 50 tarif, arama, malzeme eşleştirme ve favoriler internetsiz çalışır. Favoriler ve seçili malzemeler cihazın tarayıcı depolamasındadır; veriler silinirse kaybolur, cihazlar arasında eşitlenmez.
+In this checkout:
 
-`manifest.webmanifest` uygulama adını, kapsamını ve ikonlarını tanımlar. `sw.js` uygulama dosyalarını tek sürüm halinde önbelleğe alır. Uygulama dosyaları değiştiğinde `sw.js` içindeki `CACHE` sürümünü de artırın. Güncelleme çevrimiçiyken alınır ve sonraki açılışta görünür. Dış font veya başka bir uzak çalışma zamanı kaynağı gerekmez.
+```sh
+python3 -m http.server 8000
+```
 
-Doğrulama: GitHub Pages alt klasörünü temsil eden bir URL'de ilk yükleme ve service worker etkinleşmesi kontrol edildi; bağlantı kesilip sayfa yeniden yüklenerek 50 tarif, arama, favoriler ve malzeme eşleştirmesi çalıştırıldı. Gerçek cihazda işletim sisteminin yükleme akışı ayrıca denenmelidir.
+Open `http://localhost:8000` in your browser. No package installation, API key or backend is needed. The existing checkout is sufficient; no extra Git worktree is necessary.
+
+## Validation
+
+```sh
+node tests/catalog.test.cjs
+node --check app.js
+node --check pwa.js
+node --check sw.js
+```
+
+The catalog check runs in GitHub Actions before publication. Browser validation during development covered all 50 recipes, both languages and persistence, combined dietary filters, pantry matching, favorites, sorting, translated details, serving scaling, macro calculations, empty states, mobile layouts and offline use including images. Re-run browser validation after behavior changes.
+
+## Publish
+
+Repository: https://github.com/oyku521/gastronomy-task3-yaz.
+
+The `Publish website` GitHub Actions workflow deploys `main` to GitHub Pages. In **Settings → Pages**, choose **GitHub Actions** as the source. Only public application files, icons and images are uploaded; tests and development files are excluded from the site artifact.
+
+For application changes, bump `CACHE` in `sw.js` and keep its precache list aligned with the public assets. The worker installs the complete cache before activation. Existing open tabs can need a refresh for a new release. Favorites persist across updates; matching old Turkish favorites are migrated to stable recipe IDs where possible.
+
+## Türkçe özet
+
+İngilizce ve Türkçe seçenekli, 50 tarifli Akıllı Mutfak sitesi. İlk açılışta tüm tarifler gösterilir. Vegan ve glutensiz malzeme filtreleri birlikte kullanılabilir. Klasik tarifler de bulunur. Tarif ayrıntılarında gramaj, porsiyon ayarı, hazırlanış, alerjen notları ve porsiyon başına yaklaşık besin değerleri vardır. Besin verileri doğrulanmış kaynaklardan alınmış ölçümler değil, genel editoryal tahminlerdir. Glutensiz etiketi çölyak için güvenlik garantisi vermez; sertifikalı ürün, etiket kontrolü ve çapraz temas önlemleri gerekir.
