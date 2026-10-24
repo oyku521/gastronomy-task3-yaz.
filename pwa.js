@@ -1,6 +1,8 @@
 'use strict';
 (() => {
  const button=document.getElementById('installApp'),dialog=document.getElementById('installDialog'),nativeButton=document.getElementById('nativeInstall'),help=document.getElementById('installHelp'),status=document.getElementById('offlineStatus');
+ // Android supplies its own offline bundle and installation. Keep the live site uncached in the app.
+ if(navigator.userAgent.includes('SmartKitchenAndroid/')){button.hidden=true;status.hidden=true;return;}
  let prompt=null,ready=false;
  const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
  function update(){button.hidden=standalone();status.textContent=!navigator.onLine?t('offlineNow'):ready?t('offlineReady'):t('offlineLoading');nativeButton.hidden=!prompt;help.textContent=prompt?t('installNative'):(/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1))?t('installIos'):t('installOther');}
