@@ -63,3 +63,7 @@ For application changes, bump `CACHE` in `sw.js` and keep its precache list alig
 ## Türkçe özet
 
 İngilizce ve Türkçe seçenekli, 80 tarifli Akıllı Mutfak sitesi. İlk açılışta tüm tarifler gösterilir. Vegan ve glutensiz malzeme filtreleri birlikte kullanılabilir. Klasik tarifler de bulunur. Tarif ayrıntılarında gramaj, porsiyon ayarı, hazırlanış, alerjen notları ve porsiyon başına yaklaşık besin değerleri vardır. Besin verileri doğrulanmış kaynaklardan alınmış ölçümler değil, genel editoryal tahminlerdir. Glutensiz etiketi çölyak için güvenlik garantisi vermez; sertifikalı ürün, etiket kontrolü ve çapraz temas önlemleri gerekir.
+
+### Recipe photography
+
+All 80 recipes have separate, AI-generated, photo-realistic serving images. Five local WebP contact sheets contain 16 dishes each; recipe `photo.crop` coordinates select a single dish without adjacent panel borders. Images are illustrative, not photographs of a prepared or certified allergen-free meal. The attribution note is shown in English and Turkish on the catalog and in recipe details. Local sheets are included in the PWA offline cache and the Android snapshot.
